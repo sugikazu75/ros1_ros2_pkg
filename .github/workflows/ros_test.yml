@@ -8,10 +8,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ROS_DISTRO : foxy
-            DOCKER_IMAGE : ubuntu:focal
           - ROS_DISTRO : noetic
             DOCKER_IMAGE : ubuntu:focal
+          - ROS_DISTRO : foxy
+            DOCKER_IMAGE : ubuntu:focal
+          - ROS_DISTRO : humble
+            DOCKER_IMAGE : ubuntu:jammy
+          - ROS_DISTRO : jazzy
+            DOCKER_IMAGE : ubuntu:noble
     steps:
       - name: Setup OS
         run: |
