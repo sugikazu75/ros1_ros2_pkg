@@ -1,0 +1,7 @@
+<library path="plugin">
+  <class type="plugin_implementation::hoge" base_class_type="plugin_base::PluginBase">
+    <description>
+      A simple plugin implementation example.
+    </description>
+  </class>
+</library>

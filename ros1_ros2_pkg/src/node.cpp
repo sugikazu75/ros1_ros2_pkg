@@ -1,4 +1,4 @@
-#include <ros1_ros2_pkg/hoge.h>
+#include <ros1_ros2_pkg/base.h>
 
 int main (int argc, char **argv)
 {
@@ -9,10 +9,14 @@ int main (int argc, char **argv)
   ros::waitForShutdown();
 #elif ROS2
   rclcpp::init(argc, argv);
-  hoge* hoge_node = new hoge();
+  baseNode* base_node = new baseNode();
+  while(rclcpp::ok())
+    {
+      base_node->spin();
+    }
   rclcpp::shutdown();
 #endif
 
-  delete hoge_node;
+  delete base_node;
   return 0;
 }
