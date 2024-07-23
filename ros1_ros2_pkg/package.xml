@@ -22,6 +22,7 @@
 
   <export>
     <build_type condition="$ROS_VERSION==2">ament_cmake</build_type>
+    <ros1_ros2_pkg condition="$ROS_VERSION==1" plugin="${prefix}/plugins/plugin_ros1.xml"/>
   </export>
 
 </package>

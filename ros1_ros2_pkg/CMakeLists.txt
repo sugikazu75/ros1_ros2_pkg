@@ -15,6 +15,7 @@ if($ENV{ROS_VERSION} STREQUAL "2")
   find_package(pluginlib REQUIRED)
 elseif($ENV{ROS_VERSION} STREQUAL "1")
   find_package(catkin REQUIRED COMPONENTS
+    pluginlib
     roscpp
     )
 endif()
@@ -30,7 +31,7 @@ if($ENV{ROS_VERSION} STREQUAL "2")
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
   ament_target_dependencies(plugin rclcpp rclcpp_components std_msgs pluginlib)
-  pluginlib_export_plugin_description_file(ros1_ros2_pkg plugins/plugin.xml)
+  pluginlib_export_plugin_description_file(ros1_ros2_pkg plugins/plugin_ros2.xml)
   install(
     TARGETS plugin
     EXPORT export_${PROJECT_NAME}
@@ -79,18 +80,22 @@ if($ENV{ROS_VERSION} STREQUAL "2")
 elseif($ENV{ROS_VERSION} STREQUAL "1")
   add_definitions(-DROS1)
 
-  catkin_package()
+  catkin_package(
+    CATKIN_DEPENDS pluginlib roscpp)
 
   include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     )
 
-  add_library(hoge src/hoge.cpp)
-  target_link_libraries(hoge ${catkin_LIBRARIES})
+  add_library(plugin src/plugin.cpp)
+  target_link_libraries(plugin ${catkin_LIBRARIES})
 
-  add_executable(hoge_node src/hoge_node.cpp)
-  target_link_libraries(hoge_node ${catkin_LIBRARIES} hoge)
+  add_library(base src/base.cpp)
+  target_link_libraries(base plugin ${catkin_LIBRARIES})
+
+  add_executable(node src/node.cpp)
+  target_link_libraries(node base plugin ${catkin_LIBRARIES} )
 
 endif()
 

@@ -6,7 +6,11 @@ baseNode::baseNode():
   try
     {
       std::string plugin_name = "plugin_implementation::hoge";
+#ifdef ROS2
       instance_ = loader_.createSharedInstance(plugin_name);
+#elif ROS1
+      instance_ = loader_.createInstance(plugin_name);
+#endif
     }
   catch(pluginlib::PluginlibException& ex)
     {

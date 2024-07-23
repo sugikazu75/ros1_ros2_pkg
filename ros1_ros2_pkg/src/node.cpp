@@ -5,7 +5,7 @@ int main (int argc, char **argv)
 #ifdef ROS1
   ros::init (argc, argv, "hoge");
   ros::NodeHandle nh;
-  hoge* hoge_node = new hoge();
+  baseNode* base_node = new baseNode();
   ros::waitForShutdown();
 #elif ROS2
   rclcpp::init(argc, argv);

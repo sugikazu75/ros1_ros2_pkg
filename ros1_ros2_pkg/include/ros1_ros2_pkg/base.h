@@ -19,7 +19,10 @@ public:
   ~baseNode(){}
 
   pluginlib::ClassLoader<plugin_base::PluginBase> loader_;
+#ifdef ROS2
   std::shared_ptr<plugin_base::PluginBase> instance_;
-
+#elif ROS1
+  boost::shared_ptr<plugin_base::PluginBase> instance_;
+#endif
   void spin();
 };

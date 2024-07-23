@@ -48,6 +48,9 @@ namespace plugin_implementation
 #endif
 
   private:
+#ifdef ROS2
     void testCallback(const std_msgs::msg::String::SharedPtr msg);
+#elif ROS1
+#endif
   };
 };
