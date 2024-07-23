@@ -40,9 +40,8 @@ cp -r ${CI_SOURCE_PATH} src/${REPOSITORY_NAME} # copy the whole contents instead
 
 
 # Build
-if [[ "$ROS_DISTRO" ==  "foxy" ]]; then
-    colcon build
-fi
 if [[ "$ROS_DISTRO" ==  "noetic" ]]; then
     catkin build --no-status
+else
+    colcon build
 fi
